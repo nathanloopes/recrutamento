@@ -9,16 +9,35 @@ import { SUPABASE_ANON_KEY, SUPABASE_URL, supabase } from "@/integrations/supaba
 
 const DIRECT_URL = SUPABASE_URL;
 
-export const storageDirect = createClient<Database>(DIRECT_URL, SUPABASE_ANON_KEY, {
-  auth: {
-    persistSession: false,
-    autoRefreshToken: false,
-    detectSessionInUrl: false,
-  },
-  global: {
-    headers: { "X-Client-Info": "recrutamento-app" },
-  },
-});
+// Sem backend real (ex.: deploy de portfólio/modo demo) reutilizamos o cliente
+// principal (fictício) em vez de instanciar outro — evita o crash
+// "supabaseKey is required" quando a chave está ausente.
+function buildStorageClient(): typeof supabase {
+  const hasRealBackend =
+    !!DIRECT_URL &&
+    !DIRECT_URL.includes("YOUR_PROJECT") &&
+    !!SUPABASE_ANON_KEY &&
+    SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY";
+
+  if (!hasRealBackend) return supabase;
+
+  try {
+    return createClient<Database>(DIRECT_URL, SUPABASE_ANON_KEY, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      },
+      global: {
+        headers: { "X-Client-Info": "recrutamento-app" },
+      },
+    });
+  } catch {
+    return supabase;
+  }
+}
+
+export const storageDirect = buildStorageClient();
 
 // Propaga o access token da sessão atual para o cliente direto, para que as
 // políticas RLS em storage.objects reconheçam o usuário logado.
