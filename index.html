@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+    <title>Recruta | Recrutamento Inteligente</title>
+    <meta name="description" content="Recrutamento Inteligente">
+    <meta name="author" content="Recruta" />
+
+    <!-- PWA -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="application-name" content="Recruta" />
+
+    <!-- Ícone iOS (home screen fallback / bookmarks) -->
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta property="og:title" content="Recruta | Recrutamento Inteligente">
+    <meta name="twitter:title" content="Recruta | Recrutamento Inteligente">
+    <meta property="og:description" content="Recrutamento Inteligente">
+    <meta name="twitter:description" content="Recrutamento Inteligente">
+    <link rel="icon" type="image/png" href="/icons/icon-192.png">
+
+    <!-- Fontes servidas pelo proxy same-origin /gfonts (nginx) para não expor
+         fonts.googleapis.com/fonts.gstatic.com e permitir CSP style-src/font-src 'self'. -->
+    <link href="/gfonts/css?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

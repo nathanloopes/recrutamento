@@ -1,0 +1,190 @@
+project_id = "your-project-ref"
+
+[functions.evaluate-candidate]
+verify_jwt = false
+
+[functions.match-talents]
+verify_jwt = false
+
+[functions.transcribe-audio]
+verify_jwt = false
+
+[functions.send-whatsapp]
+verify_jwt = false
+
+[functions.send-email]
+verify_jwt = false
+
+[functions.sync-erp]
+verify_jwt = false
+
+[functions.simulate-evaluation]
+verify_jwt = false
+
+[functions.test-integrations]
+verify_jwt = false
+
+[functions.import-erp-admins]
+verify_jwt = false
+
+[functions.import-erp-franqueados]
+verify_jwt = false
+[functions.list-erp-franqueados]
+verify_jwt = false
+[functions.auth-erp-login]
+verify_jwt = false
+[functions.send-reset-email]
+verify_jwt = false
+
+[functions.test-brevo-health]
+verify_jwt = false
+
+[functions.faq-assistant]
+verify_jwt = false
+
+[functions.generate-faq-from-ticket]
+verify_jwt = false
+
+[functions.reformulate-faq-response]
+verify_jwt = false
+
+[functions.interview-reminders]
+verify_jwt = false
+
+[functions.notify-interview-scheduled]
+verify_jwt = false
+
+[functions.sara-reply]
+verify_jwt = false
+
+[functions.sara-rewrite]
+verify_jwt = true
+
+
+[functions.generate-test]
+verify_jwt = false
+
+[functions.send-push-notification]
+verify_jwt = false
+
+[functions.grade-essay]
+verify_jwt = false
+
+[functions.auto-evaluate-response]
+verify_jwt = false
+
+[functions.geocode-cep]
+verify_jwt = false
+
+[functions.sync-erp-units]
+verify_jwt = false
+
+[functions.register-web-session]
+verify_jwt = false
+
+[functions.heartbeat-web-session]
+verify_jwt = false
+
+[functions.revoke-identity-session]
+verify_jwt = false
+
+[functions.create-session-delegation]
+verify_jwt = false
+
+[functions.exchange-session-delegation]
+verify_jwt = false
+
+[functions.refresh-delegated-session]
+verify_jwt = false
+
+[functions.send-approved-documents]
+verify_jwt = false
+
+[functions.send-documents-external]
+verify_jwt = false
+
+[functions.send-notification-cascade]
+verify_jwt = false
+
+[functions.generate-metrics-snapshot]
+verify_jwt = false
+
+[functions.validate-job-description]
+verify_jwt = false
+
+[functions.document-deadline-reminders]
+verify_jwt = false
+
+[functions.document-retention-cleanup]
+verify_jwt = false
+
+[functions.evaluate-test-voice]
+verify_jwt = false
+
+[functions.ai-talent-suggestions]
+verify_jwt = false
+
+[functions.import-csv-users]
+verify_jwt = false
+
+[functions.lookup-cep]
+verify_jwt = false
+
+[functions.detect-stalled-onboardings]
+verify_jwt = false
+
+[functions.lookup-cpf]
+verify_jwt = false
+[functions.sync-erp-franchisee-units]
+verify_jwt = false
+[functions.delete-account]
+verify_jwt = false
+[functions.reprocess-test-assignments]
+verify_jwt = false
+[functions.cleanup-push-tokens]
+verify_jwt = false
+[functions.process-email-queue]
+verify_jwt = false
+
+[functions.livekit-token]
+verify_jwt = false
+
+[functions.livekit-start-room]
+verify_jwt = false
+
+[functions.livekit-end-room]
+verify_jwt = false
+
+[functions.livekit-moderate]
+verify_jwt = false
+
+
+[functions.restore-backup-v2-inspect]
+verify_jwt = false
+
+[functions.restore-backup-v3-inspect]
+verify_jwt = false
+
+[functions.restore-backup-v4-inspect]
+verify_jwt = false
+
+[functions.restore-backup-v4-social]
+verify_jwt = false
+
+[functions.restore-backup-v4-diff]
+verify_jwt = false
+
+[functions.restore-backup-check-links]
+verify_jwt = false
+
+[functions.restore-backup-compare]
+verify_jwt = false
+
+[functions.sign-in-with-cpf]
+verify_jwt = false
+
+[functions.request-password-reset-by-cpf]
+verify_jwt = false
+
+[functions.csp-report]
+verify_jwt = false

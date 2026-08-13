@@ -1,0 +1,89 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# MediaPipe WASM: copiado de node_modules em build (tools/copy-mediapipe-wasm.mjs).
+# Nao versionar ~18MB de binarios; o build os regenera. O modelo .tflite fica versionado.
+public/mediapipe/wasm/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Supabase local state
+supabase/.temp/
+
+# Platform / tooling
+.lovable/
+
+# Development artifacts
+PATCH_COMPLETO.diff
+*.diff
+*.patch
+
+# Local setup / provisioning scripts (podem conter credenciais)
+scripts/
+*.local.sh
+
+# Binary lock files
+bun.lockb
+
+# Coverage & test output
+coverage/
+*.lcov
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Secrets & certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+
+# ---- Ruflo / Claude Flow: runtime gerado (não versionar) ----
+# Bancos de dados / memória (binários, regenerados em runtime)
+ruvector.db
+.swarm/
+
+# Estado de runtime do claude-flow (daemon, métricas, políticas aprendidas,
+# caminhos específicos da máquina). A config estática (.claude-flow/config.yaml,
+# CAPABILITIES.md, .gitignore) permanece versionada.
+.claude-flow/daemon.pid
+.claude-flow/daemon-state.json
+.claude-flow/memory-package.json
+.claude-flow/harness-active-policy.json
+.claude-flow/metrics/
+.claude-flow/security/
+.claude-flow/swarm/
+.claude-flow/data/
+.claude-flow/logs/
+.claude-flow/neural/
+.claude-flow/sessions/
+
+# Config local do Claude Code (permissões/estado por máquina)
+.claude/settings.local.json
