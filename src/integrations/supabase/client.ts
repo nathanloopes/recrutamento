@@ -21,10 +21,22 @@ export const SUPABASE_PUBLISHABLE_KEY: string =
 // Alias semântico para uso em headers HTTP (`apikey`).
 export const SUPABASE_ANON_KEY: string = SUPABASE_PUBLISHABLE_KEY;
 
+// Há um backend Supabase real configurado? (URL/chave presentes e não placeholder)
+const hasRealBackend =
+  !!SUPABASE_URL &&
+  !SUPABASE_URL.includes("YOUR_PROJECT") &&
+  !!SUPABASE_PUBLISHABLE_KEY &&
+  SUPABASE_PUBLISHABLE_KEY !== PLACEHOLDER_ANON_KEY;
+
+// Usa o cliente fictício quando em modo demo OU quando não há backend real
+// configurado (ex.: deploy de portfólio sem variáveis de ambiente). Assim o
+// `createClient` nunca é chamado sem chave (evita crash "supabaseKey is required").
+const useDemoClient = DEMO_MODE || !hasRealBackend;
+
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-export const supabase = DEMO_MODE
+export const supabase = useDemoClient
   ? (createDemoClient() as unknown as ReturnType<typeof createClient<Database>>)
   : createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
