@@ -428,7 +428,7 @@ export default function Login() {
         </button>
         <div className="w-full max-w-sm mx-auto my-auto animate-slide-up">
           <div className="text-center mb-8">
-            <img src={logoHeader} alt="Recruta" className="h-16 mx-auto mb-6" />
+            <span className="block text-3xl font-bold text-[#3D2B1F] mb-6">Recruta</span>
             <h1 className="text-2xl font-bold text-[#3D2B1F]">
               Bem-vindo!
             </h1>

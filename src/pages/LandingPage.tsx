@@ -63,7 +63,7 @@ export default function LandingPage() {
       <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 safe-top safe-left safe-right">
         <div className="container flex h-14 items-center justify-between gap-2">
           <div className="min-w-0 flex-shrink">
-            <img src={logoHeader} alt="Logo Recruta" className="h-9 sm:h-10 w-auto max-w-full" />
+            <span className="text-xl sm:text-2xl font-bold text-primary">Recruta</span>
           </div>
           <div className="flex items-center gap-1.5 sm:gap-4 shrink-0">
             <a

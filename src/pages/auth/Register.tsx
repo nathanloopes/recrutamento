@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { NativeFileInput, type NativeFileInputHandle } from "@/components/ui/NativeFileInput";
+import heroTeam from "@/assets/hero-team.jpg";
 import { formatCPF } from "@/lib/cpf";
 import { formatCEP, formatPhone } from "@/lib/masks";
 import { ymdToLocalDate, dateToLocalYMD } from "@/lib/dateUtils";
@@ -503,7 +504,7 @@ export default function Register() {
           </button>
 
           <div className="text-center mb-3">
-            <img src={logoHeader} alt="Recruta" className="h-10 mx-auto mb-2" />
+            <span className="block text-2xl font-bold text-[#3D2B1F] mb-2">Recruta</span>
           </div>
 
           {/* Stepper */}

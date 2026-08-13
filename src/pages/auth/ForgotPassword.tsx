@@ -139,7 +139,7 @@ function ForgotPasswordForm({
           </button>
 
           <div className="text-center mb-6">
-            <img src={logoHeader} alt="Recruta" className="h-14 mx-auto mb-4" />
+            <span className="block text-2xl font-bold text-[#3D2B1F] mb-4">Recruta</span>
           </div>
 
           <Card className="border-0 shadow-2xl">

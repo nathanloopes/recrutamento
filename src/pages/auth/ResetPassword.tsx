@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
+import heroTeam from "@/assets/hero-team.jpg";
 import {
   setRecoveryMode,
   clearRecoveryMode,
@@ -383,7 +384,7 @@ export default function ResetPassword() {
       <div className="flex flex-col items-center justify-start md:justify-center px-6 pt-12 pb-[60vh] md:pb-12 bg-gradient-to-b from-amber-50 via-amber-100/30 to-amber-50">
         <div className="w-full max-w-sm animate-slide-up">
           <div className="text-center mb-6">
-            <img src={logoHeader} alt="Recruta" className="h-14 mx-auto mb-4" />
+            <span className="block text-2xl font-bold text-[#3D2B1F] mb-4">Recruta</span>
           </div>
 
           <Card className="border-0 shadow-2xl">
