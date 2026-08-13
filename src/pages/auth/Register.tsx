@@ -504,7 +504,7 @@ export default function Register() {
           </button>
 
           <div className="text-center mb-3">
-            <span className="block text-2xl font-bold text-[#3D2B1F] mb-2">Recruta</span>
+            <span className="block font-display text-xl font-extrabold tracking-tight bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent mb-2">Recrutamento Inteligente</span>
           </div>
 
           {/* Stepper */}

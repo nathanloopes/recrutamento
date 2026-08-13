@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { Loader2, CheckCircle2, ArrowLeft, Eye, EyeOff } from "lucide-react";
+import { Loader2, CheckCircle2, ArrowLeft, Eye, EyeOff, User, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,6 +13,8 @@ import { useGlobalSettings } from "@/hooks/useGlobalSettings";
 // logFailedLogin: agora tratado server-side pela edge function `sign-in-with-cpf`.
 import { clearAllRecoveryFlags } from "@/lib/recoveryMode";
 import { resolvePostAuthRedirect } from "@/lib/postAuthRedirect";
+import { DEMO_MODE } from "@/lib/demo/config";
+import { demoSignIn } from "@/lib/demo/mockClient";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -324,6 +326,16 @@ export default function Login() {
     }
 
     try {
+      // Modo demonstração: sem backend. Autentica localmente e redireciona.
+      if (DEMO_MODE) {
+        const role = cleaned === "00000000000" ? "admin" : "candidate";
+        demoSignIn(role);
+        const target = resolvePostAuthRedirect(location.search);
+        navigate(target ?? "/", { replace: true });
+        try { window.sessionStorage?.removeItem(DEACTIVATED_LOGIN_PENDING_KEY); } catch { /* ignore */ }
+        return;
+      }
+
       // Login unificado por CPF. A edge function resolve o e-mail server-side
       // (nunca chega ao cliente), tenta delegação ERP e cai em Supabase
       // Auth se preciso. Assim o e-mail não trafega pelo browser.
@@ -428,7 +440,7 @@ export default function Login() {
         </button>
         <div className="w-full max-w-sm mx-auto my-auto animate-slide-up">
           <div className="text-center mb-8">
-            <span className="block text-3xl font-bold text-[#3D2B1F] mb-6">Recruta</span>
+            <span className="block font-display text-2xl font-extrabold tracking-tight bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent mb-6">Recrutamento Inteligente</span>
             <h1 className="text-2xl font-bold text-[#3D2B1F]">
               Bem-vindo!
             </h1>
@@ -436,6 +448,31 @@ export default function Login() {
               Recrutamento Inteligente
             </p>
           </div>
+
+          {DEMO_MODE && (
+            <div className="mb-6">
+              <p className="text-center text-xs font-semibold uppercase tracking-widest text-[#3D2B1F]/50 mb-3">Acesso rápido (demonstração)</p>
+              <div className="grid gap-3">
+                <Button
+                  type="button"
+                  onClick={() => { demoSignIn("candidate"); navigate("/inicio", { replace: true }); }}
+                  className="w-full h-12 text-base font-semibold gap-2 bg-amber-500 hover:bg-amber-600 text-white"
+                >
+                  <User className="h-4 w-4" />
+                  Entrar como Candidato
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => { demoSignIn("admin"); navigate("/admin", { replace: true }); }}
+                  className="w-full h-12 text-base font-semibold gap-2 border-amber-500 text-amber-700 hover:bg-amber-50"
+                >
+                  <Briefcase className="h-4 w-4" />
+                  Entrar como Recrutador
+                </Button>
+              </div>
+            </div>
+          )}
 
           <Card className="border-0 shadow-2xl">
             <CardHeader className="pb-4">

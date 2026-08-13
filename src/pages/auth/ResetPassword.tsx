@@ -384,7 +384,7 @@ export default function ResetPassword() {
       <div className="flex flex-col items-center justify-start md:justify-center px-6 pt-12 pb-[60vh] md:pb-12 bg-gradient-to-b from-amber-50 via-amber-100/30 to-amber-50">
         <div className="w-full max-w-sm animate-slide-up">
           <div className="text-center mb-6">
-            <span className="block text-2xl font-bold text-[#3D2B1F] mb-4">Recruta</span>
+            <span className="block font-display text-2xl font-extrabold tracking-tight bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent mb-4">Recrutamento Inteligente</span>
           </div>
 
           <Card className="border-0 shadow-2xl">

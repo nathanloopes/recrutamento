@@ -4,6 +4,8 @@
 // rotação e a configuração por ambiente.
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './types';
+import { DEMO_MODE } from '@/lib/demo/config';
+import { createDemoClient } from '@/lib/demo/mockClient';
 
 const PLACEHOLDER_URL = "https://YOUR_PROJECT.supabase.co";
 const PLACEHOLDER_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
@@ -22,7 +24,9 @@ export const SUPABASE_ANON_KEY: string = SUPABASE_PUBLISHABLE_KEY;
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+export const supabase = DEMO_MODE
+  ? (createDemoClient() as unknown as ReturnType<typeof createClient<Database>>)
+  : createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
     storage: localStorage,
     persistSession: true,

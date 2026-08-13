@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, Loader2, ExternalLink, Briefcase, User } from "lucide-react";
+import { ArrowRight, Loader2, Briefcase, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { formatCPF, cleanCPF, isValidCPF } from "@/lib/cpf";
 import { supabase } from "@/integrations/supabase/client";
+import { DEMO_MODE } from "@/lib/demo/config";
+import { demoSignIn } from "@/lib/demo/mockClient";
 
 export default function LandingPage() {
   const [cpf, setCpf] = useState("");
@@ -16,6 +18,11 @@ export default function LandingPage() {
     const formatted = formatCPF(e.target.value);
     setCpf(formatted);
     if (error) setError("");
+  };
+
+  const enterDemo = (role: "candidate" | "admin") => {
+    demoSignIn(role);
+    navigate(role === "admin" ? "/admin" : "/inicio", { replace: true });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -61,21 +68,8 @@ export default function LandingPage() {
     <div className="flex min-h-dvh flex-col bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 safe-top safe-left safe-right">
-        <div className="container flex h-14 items-center justify-between gap-2">
-          <div className="min-w-0 flex-shrink">
-            <span className="text-xl sm:text-2xl font-bold text-primary">Recruta</span>
-          </div>
-          <div className="flex items-center gap-1.5 sm:gap-4 shrink-0">
-            <a
-              href="https://example.com/home/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1 text-sm font-medium text-[#3D2B1F] hover:text-amber-600 transition-colors"
-            >
-              Sobre Nós
-              <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          </div>
+        <div className="container flex h-14 items-center justify-center gap-2">
+          <span className="font-display text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 bg-clip-text text-transparent">Recrutamento Inteligente</span>
         </div>
       </header>
 
@@ -107,50 +101,73 @@ export default function LandingPage() {
 
           {/* Subtítulo */}
           <p className="text-sm text-muted-foreground mt-5">
-            Informe seu CPF para ver vagas e acompanhar seu processo.
+            {DEMO_MODE
+              ? "Escolha um perfil para explorar a demonstração."
+              : "Informe seu CPF para ver vagas e acompanhar seu processo."}
           </p>
 
           <div className="border-t my-6" />
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <label htmlFor="cpf" className="block text-xs font-semibold tracking-wider text-[#3D2B1F]/70 uppercase">
-              CPF
-            </label>
-            <div className="relative">
-              <Input
-                id="cpf"
-                type="text"
-                inputMode="numeric"
-                placeholder="000.000.000-00"
-                value={cpf}
-                onChange={handleChange}
-                className="h-12 pr-11 text-base tracking-wider"
-                autoFocus
-                maxLength={14}
-                disabled={loading}
-              />
-              <User className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" />
+          {DEMO_MODE ? (
+            <div className="grid gap-3">
+              <Button
+                type="button"
+                onClick={() => enterDemo("candidate")}
+                className="w-full h-12 text-base font-semibold gap-2 bg-amber-500 hover:bg-amber-600 text-white"
+              >
+                <User className="h-4 w-4" />
+                Entrar como Candidato
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => enterDemo("admin")}
+                className="w-full h-12 text-base font-semibold gap-2 border-amber-500 text-amber-700 hover:bg-amber-50"
+              >
+                <Briefcase className="h-4 w-4" />
+                Entrar como Recrutador
+              </Button>
             </div>
-            {error && <p className="text-sm text-destructive animate-fade-in">{error}</p>}
-            <Button
-              type="submit"
-              className="w-full h-12 text-base font-semibold gap-2 bg-amber-500 hover:bg-amber-600 text-white"
-              disabled={cleanCPF(cpf).length !== 11 || loading}
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Consultando...
-                </>
-              ) : (
-                <>
-                  Entrar no portal
-                  <ArrowRight className="h-4 w-4" />
-                </>
-              )}
-            </Button>
-          </form>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <label htmlFor="cpf" className="block text-xs font-semibold tracking-wider text-[#3D2B1F]/70 uppercase">
+                CPF
+              </label>
+              <div className="relative">
+                <Input
+                  id="cpf"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="000.000.000-00"
+                  value={cpf}
+                  onChange={handleChange}
+                  className="h-12 pr-11 text-base tracking-wider"
+                  autoFocus
+                  maxLength={14}
+                  disabled={loading}
+                />
+                <User className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground pointer-events-none" />
+              </div>
+              {error && <p className="text-sm text-destructive animate-fade-in">{error}</p>}
+              <Button
+                type="submit"
+                className="w-full h-12 text-base font-semibold gap-2 bg-amber-500 hover:bg-amber-600 text-white"
+                disabled={cleanCPF(cpf).length !== 11 || loading}
+              >
+                {loading ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Consultando...
+                  </>
+                ) : (
+                  <>
+                    Entrar no portal
+                    <ArrowRight className="h-4 w-4" />
+                  </>
+                )}
+              </Button>
+            </form>
+          )}
         </div>
       </section>
 
